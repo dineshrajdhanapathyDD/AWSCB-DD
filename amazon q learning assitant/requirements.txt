@@ -1,0 +1,7 @@
+feedparser==6.0.10
+requests==2.31.0
+beautifulsoup4==4.12.2
+python-dotenv==1.0.0
+boto3==1.34.0  # For Amazon Bedrock integration
+flask==2.3.3   # For web interface
+diagrams==0.23.3  # For generating architecture diagrams (optional)
