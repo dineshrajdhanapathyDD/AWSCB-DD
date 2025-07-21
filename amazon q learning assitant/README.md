@@ -40,6 +40,47 @@ cp .env.template .env
    - For Gmail users, you'll need to create an App Password (see [Google's instructions](https://support.google.com/accounts/answer/185833))
    - For other email providers, use the appropriate SMTP server and port
 
+To **set up email sending in your AWS Learning Assistant project for demo purposes**, you’ll need to configure SMTP using either:
+
+1.  **Gmail (App Password)**
+    
+2.  **Other email provider (like Outlook, Yahoo)**
+    
+
+Here’s a **step-by-step guide** for **Gmail**, plus a generic SMTP setup for others — suitable for running your assistant in demo mode:
+
+----------
+
+## ✅ Option 1: Gmail (with App Password)
+
+> ❗ _Google blocks "less secure apps", so you must use an App Password—not your main Gmail password._
+
+### 🔧 Steps:
+
+1.  **Enable 2-Step Verification** on your Google Account  
+    Go to: https://myaccount.google.com/security
+    
+2.  **Create an App Password**
+    
+    -   Visit: https://myaccount.google.com/apppasswords
+        
+    -   Choose: **Mail** as the app, **Other** (Custom name like "AWS Assistant")
+        
+    -   Google will generate a 16-character password — copy it.
+        
+3.  **Update `.env` file:**
+    
+    env
+    
+  
+    
+    `EMAIL_HOST=smtp.gmail.com
+    EMAIL_PORT=587
+    EMAIL_USE_TLS=True
+    EMAIL_HOST_USER=yourname@gmail.com
+    EMAIL_HOST_PASSWORD=your_app_password_here`
+   
+
 ### Usage
 
 Run the complete assistant (email updates and web interface):

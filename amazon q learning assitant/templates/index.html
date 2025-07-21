@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AWS Learning Assistant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #232F3E;
+            color: white;
+            padding: 10px 20px;
+            margin: -20px -20px 20px;
+            border-radius: 5px 5px 0 0;
+        }
+        .summary {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #FF9900;
+            background-color: #fafafa;
+        }
+        .quiz {
+            background-color: #f0f8ff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .date-selector {
+            margin: 20px 0;
+        }
+        select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #FF9900;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e68a00;
+        }
+        .stats {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AWS Learning Assistant</h1>
+        </div>
+        
+        <div class="date-selector">
+            <form method="GET" action="/">
+                <label for="date">Select Date:</label>
+                <select name="date" id="date">
+                    {% for date in available_dates %}
+                        <option value="{{ date }}" {% if date == selected_date %}selected{% endif %}>{{ date }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">View</button>
+            </form>
+        </div>
+        
+        {% if content %}
+            <h2>AWS Updates for {{ selected_date }}</h2>
+            
+            {% for summary in content.summaries %}
+                <div class="summary">
+                    <h3>{{ summary.title }}</h3>
+                    <p>{{ summary.summary }}</p>
+                    <p><a href="{{ summary.link }}" target="_blank">Read more</a></p>
+                </div>
+            {% endfor %}
+            
+            <div class="quiz">
+                <h2>Quiz Question</h2>
+                <p><strong>{{ content.quiz_question.question }}</strong></p>
+                <div class="options">
+                    {% for option in content.quiz_question.options %}
+                        <p {% if option == content.quiz_question.correct_answer %}class="correct"{% endif %}>
+                            {{ loop.index | chr }}. {{ option }}
+                            {% if option == content.quiz_question.correct_answer %}(Correct Answer){% endif %}
+                        </p>
+                    {% endfor %}
+                </div>
+                <p>Source: <a href="{{ content.quiz_question.source }}" target="_blank">Read the article</a></p>
+            </div>
+            
+            {% if stats %}
+            <div class="stats">
+                <h2>Your Learning Stats</h2>
+                <p>Total updates read: {{ stats.total_updates }}</p>
+                <p>Quiz questions answered: {{ stats.quizzes_answered }}</p>
+                <p>Correct answers: {{ stats.correct_answers }}</p>
+                <p>Learning streak: {{ stats.streak }} days</p>
+            </div>
+            {% endif %}
+        {% else %}
+            <p>No content available for the selected date.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+    
