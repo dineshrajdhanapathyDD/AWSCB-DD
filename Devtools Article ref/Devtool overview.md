@@ -1,4 +1,4 @@
-This project demonstrates how to connect the **Kiro IDE** with **Model Context Protocol (MCP)** to seamlessly access and reference **AWS documentation** within your development workflow. By configuring MCP, developers can pull relevant AWS service docs directly into the IDE, reducing context switching, speeding up troubleshooting, and making cloud development more efficient.
+This article refers how to get ideas about devtools using **Kiro IDE** with **Model Context Protocol (MCP)** to seamlessly access and reference **AWS documentation** within your development workflow. By configuring MCP, developers can pull relevant AWS service docs directly into the IDE, reducing context switching, speeding up troubleshooting, and making cloud development more efficient.
 
 -----
 
@@ -437,17 +437,17 @@ An execution represents a single run of a pipeline. Each execution has a unique 
 
 ## Execution Modes
 
-### SUPERSEDED Mode (Default)
+#### SUPERSEDED Mode (Default)
 
 -   Newer executions can overtake and replace older ones waiting to enter a stage
 -   Optimizes for delivering the latest changes
 
-### QUEUED Mode (V2 only)
+#### QUEUED Mode (V2 only)
 
 -   Executions are processed one by one in the order they are queued
 -   Ensures all changes are processed in sequence
 
-### PARALLEL Mode (V2 only)
+#### PARALLEL Mode (V2 only)
 
 -   Executions run simultaneously and independently
 -   Allows multiple changes to be processed concurrently
